@@ -74,11 +74,15 @@ def shop_trip() -> None:
             print("You have bought:")
 
             for product, quantity in customer.product_cart.items():
+                formatted_result = (f"{cheapest_shop.products[product]
+                                       * quantity:.2f}"
+                                    .rstrip('0').rstrip('.'))
                 print(f"{quantity} {product}s for "
-                      f"{cheapest_shop.products[product] * quantity:.2f} "
+                      f"{formatted_result} "
                       f"dollars")
 
-            print(f"Total cost is {cheapest_cart:.2f} dollars")
+            formated_cart = f"{cheapest_cart:.2f}".rstrip('0').rstrip('.')
+            print(f"Total cost is {formated_cart} dollars")
             print("See you again!\n")
             print(f"{customer.name} rides home")
             customer.location = home
