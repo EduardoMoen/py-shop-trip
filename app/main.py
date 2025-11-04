@@ -8,7 +8,7 @@ from app.shop import Shop
 
 def shop_trip() -> None:
     current_dir = Path(__file__).resolve().parent
-    config_path = current_dir.parent / "app/config.json"
+    config_path = current_dir.parent / "config.json"
     with open(config_path, "r") as f:
         config = json.load(f)
 
@@ -53,7 +53,7 @@ def shop_trip() -> None:
 
             total = shop_cost + (fuel_cost * 2)
             print(f"{customer.name}'s trip to the "
-                  f"{shop.name} costs{total: .2f}")
+                  f"{shop.name} costs {total:.2f}")
 
             if total < cheapest_cost:
                 cheapest_cost = total
@@ -64,6 +64,7 @@ def shop_trip() -> None:
             print(f"{customer.name} doesn't have enough money "
                   f"to make a purchase in any shop")
         else:
+            home = customer.location
             customer.location = cheapest_shop.location
             customer.purchase(cheapest_cost)
             print(f"{customer.name} rides to {cheapest_shop.name}\n")
@@ -73,11 +74,12 @@ def shop_trip() -> None:
             print("You have bought:")
 
             for product, quantity in customer.product_cart.items():
-                print(f"{quantity} {product}s for"
-                      f"{cheapest_shop.products[product] * quantity: g} "
+                print(f"{quantity} {product}s for "
+                      f"{cheapest_shop.products[product] * quantity:g} "
                       f"dollars")
 
             print(f"Total cost is {cheapest_cart} dollars")
             print("See you again!\n")
             print(f"{customer.name} rides home")
-            print(f"{customer.name} now has{customer.money: .2f} dollars\n")
+            customer.location = home
+            print(f"{customer.name} now has {customer.money:.2f} dollars\n")
