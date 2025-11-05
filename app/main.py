@@ -75,9 +75,8 @@ def shop_trip() -> None:
 
             for product, quantity in customer.product_cart.items():
                 price = cheapest_shop.products[product] * quantity
-                price = int(price) if price.is_integer() else price
                 print(f"{quantity} {product}s for "
-                      f"{price} dollars")
+                      f"{price:.2f}".rstrip("0").strip(".") + " dollars")
 
             print(f"Total cost is {cheapest_cart} dollars")
             print("See you again!\n")
