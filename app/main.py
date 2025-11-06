@@ -65,7 +65,7 @@ def shop_trip() -> None:
                   f"to make a purchase in any shop")
         else:
             home = customer.location
-            customer.location = cheapest_shop.location
+            customer.move_to(cheapest_shop.location)
             customer.purchase(cheapest_cost)
             print(f"{customer.name} rides to {cheapest_shop.name}\n")
             print(f"Date: "
@@ -81,5 +81,5 @@ def shop_trip() -> None:
             print(f"Total cost is {cheapest_cart} dollars")
             print("See you again!\n")
             print(f"{customer.name} rides home")
-            customer.location = home
+            customer.move_to(home)
             print(f"{customer.name} now has {customer.money:.2f} dollars\n")
